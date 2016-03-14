@@ -1785,6 +1785,11 @@
 						isRotated = (this.xLabelRotation > 0),
 						drawVerticalLine = this.showVerticalLines;
 
+          
+          if (index % this.verticalLineInterval !== 0) {
+            drawVerticalLine = false;
+          };
+
 					// This is Y axis, so draw it
 					if (index === 0 && !drawVerticalLine){
 						drawVerticalLine = true;

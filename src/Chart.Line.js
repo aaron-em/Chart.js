@@ -22,6 +22,9 @@
 		//Boolean - Whether to show vertical lines (except Y axis)
 		scaleShowVerticalLines: true,
 
+    //Number - Interval at which to show vertical lines (every Nth line)
+    verticalLineInterval: 1,
+
 		//Boolean - Whether to show ticks on the X axis
 		scaleShowXTicks: true,
 
@@ -206,6 +209,7 @@
 				lineColor : this.options.scaleLineColor,
 				showHorizontalLines : this.options.scaleShowHorizontalLines,
 				showVerticalLines : this.options.scaleShowVerticalLines,
+        verticalLineInterval : this.options.verticalLineInterval,
         showXTicks: this.options.scaleShowXTicks,
 				gridLineWidth : (this.options.scaleShowGridLines) ? this.options.scaleGridLineWidth : 0,
 				gridLineColor : (this.options.scaleShowGridLines) ? this.options.scaleGridLineColor : "rgba(0,0,0,0)",
