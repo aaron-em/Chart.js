@@ -1785,6 +1785,11 @@
 						isRotated = (this.xLabelRotation > 0),
 						drawVerticalLine = this.showVerticalLines;
 
+          
+          if (index % this.verticalLineInterval !== 0) {
+            drawVerticalLine = false;
+          };
+
 					// This is Y axis, so draw it
 					if (index === 0 && !drawVerticalLine){
 						drawVerticalLine = true;
@@ -1817,11 +1822,13 @@
 
 
 					// Small lines at the bottom of the base grid line
-					ctx.beginPath();
-					ctx.moveTo(linePos,this.endPoint);
-					ctx.lineTo(linePos,this.endPoint + 5);
-					ctx.stroke();
-					ctx.closePath();
+          if (this.showXTicks) {
+					  ctx.beginPath();
+					  ctx.moveTo(linePos,this.endPoint);
+					  ctx.lineTo(linePos,this.endPoint + 5);
+					  ctx.stroke();
+					  ctx.closePath();
+          }
 
 					ctx.save();
 					ctx.translate(xPos,(isRotated) ? this.endPoint + 12 : this.endPoint + 8);
@@ -2276,6 +2283,9 @@
 		//Boolean - Whether to show vertical lines (except Y axis)
 		scaleShowVerticalLines: true,
 
+		//Boolean - Whether to show ticks on the X axis
+		scaleShowXTicks: true,
+
 		//Boolean - If there is a stroke on each bar
 		barShowStroke : true,
 
@@ -2465,6 +2475,7 @@
 				lineColor : this.options.scaleLineColor,
 				showHorizontalLines : this.options.scaleShowHorizontalLines,
 				showVerticalLines : this.options.scaleShowVerticalLines,
+        showXTicks : this.scaleShowXTicks,
 				gridLineWidth : (this.options.scaleShowGridLines) ? this.options.scaleGridLineWidth : 0,
 				gridLineColor : (this.options.scaleShowGridLines) ? this.options.scaleGridLineColor : "rgba(0,0,0,0)",
 				padding : (this.options.showScale) ? 0 : (this.options.barShowStroke) ? this.options.barStrokeWidth : 0,
@@ -2772,6 +2783,12 @@
 		//Boolean - Whether to show vertical lines (except Y axis)
 		scaleShowVerticalLines: true,
 
+    //Number - Interval at which to show vertical lines (every Nth line)
+    verticalLineInterval: 1,
+
+		//Boolean - Whether to show ticks on the X axis
+		scaleShowXTicks: true,
+
 		//Boolean - Whether the line is curved between points
 		bezierCurve : true,
 
@@ -2953,6 +2970,8 @@
 				lineColor : this.options.scaleLineColor,
 				showHorizontalLines : this.options.scaleShowHorizontalLines,
 				showVerticalLines : this.options.scaleShowVerticalLines,
+        verticalLineInterval : this.options.verticalLineInterval,
+        showXTicks: this.options.scaleShowXTicks,
 				gridLineWidth : (this.options.scaleShowGridLines) ? this.options.scaleGridLineWidth : 0,
 				gridLineColor : (this.options.scaleShowGridLines) ? this.options.scaleGridLineColor : "rgba(0,0,0,0)",
 				padding: (this.options.showScale) ? 0 : this.options.pointDotRadius + this.options.pointDotStrokeWidth,
